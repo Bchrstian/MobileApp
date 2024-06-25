@@ -12,9 +12,21 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={MyTabs} />
-        <Drawer.Screen name="Settings" component={SettingsScreen} />
-        <Drawer.Screen name="Privacy" component={PrivacyScreen} />
+        <Drawer.Screen
+          name="Home"
+          component={MyTabs}
+          options={{ title: "Home" }} // Set the title for the drawer item
+        />
+        <Drawer.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{ title: "Settings" }} // Set the title for the drawer item
+        />
+        <Drawer.Screen
+          name="Privacy"
+          component={PrivacyScreen}
+          options={{ title: "Privacy" }} // Set the title for the drawer item
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
