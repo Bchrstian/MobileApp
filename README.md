@@ -42,13 +42,10 @@ This project implements a tab-based navigation with multiple screens accessible 
 
 ## Screenshots
 
+<img width="931" alt="image" src="https://github.com/Bchrstian/MobileApp/assets/111287134/92eec83e-d0a5-4de3-8886-76a2204bb63f">
+<img width="929" alt="image" src="https://github.com/Bchrstian/MobileApp/assets/111287134/4bbcf4fd-4bb2-499b-86ed-c9fa2fd8e29e">
+<img width="870" alt="image" src="https://github.com/Bchrstian/MobileApp/assets/111287134/a843b341-7a1a-4be0-b8ba-148be0617116">
 
-![WhatsApp Image 2024-06-26 at 22 53 51_1ed14ec2](https://github.com/Bchrstian/MobileApp/assets/111287134/e07d2ac8-f3b9-426d-93c6-16c274caeec4)
-![WhatsApp Image 2024-06-26 at 22 53 51_f1fddc8c](https://github.com/Bchrstian/MobileApp/assets/111287134/55bb67b3-a2e0-40dc-ac4b-0ea382a313c9)
-![WhatsApp Image 2024-06-26 at 22 53 52_39797eb9](https://github.com/Bchrstian/MobileApp/assets/111287134/ebddf023-4db1-4354-ab1d-9f9b81c565e1)
-![WhatsApp Image 2024-06-26 at 22 53 56_002a828d](https://github.com/Bchrstian/MobileApp/assets/111287134/060bd7cc-37aa-4c5d-ace2-3bc2b5a84498)
-![WhatsApp Image 2024-06-26 at 22 53 54_b55a40a9](https://github.com/Bchrstian/MobileApp/assets/111287134/e01ce1d2-6987-438d-9630-71d75550b81a)
-![WhatsApp Image 2024-06-26 at 22 53 55_dee35ca9](https://github.com/Bchrstian/MobileApp/assets/111287134/bef75626-1237-46a9-8dbe-a34be34b35a8)
-![WhatsApp Image 2024-06-26 at 22 53 54_96846d71](https://github.com/Bchrstian/MobileApp/assets/111287134/2af7046e-d99d-479d-8b08-27279e1fb8ca)
+
 
 ---
