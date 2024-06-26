@@ -30,12 +30,35 @@ function MyTabs() {
         },
         tabBarActiveTintColor: "tomato",
         tabBarInactiveTintColor: "gray",
+        tabBarStyle: {
+          backgroundColor: "#1a1a1a", // Dark background for the tab bar
+        },
+        headerStyle: {
+          backgroundColor: "#1a1a1a", // Dark background for the header
+        },
+        headerTintColor: "#fff", // White color for the header text
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Register" component={RegisterScreen} />
-      <Tab.Screen name="Sign In" component={SignInScreen} />
-      <Tab.Screen name="Calculator" component={CalculatorScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ title: "Home" }}
+      />
+      <Tab.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{ title: "Register" }}
+      />
+      <Tab.Screen
+        name="Sign In"
+        component={SignInScreen}
+        options={{ title: "Sign In" }}
+      />
+      <Tab.Screen
+        name="Calculator"
+        component={CalculatorScreen}
+        options={{ title: "Calculator" }}
+      />
     </Tab.Navigator>
   );
 }

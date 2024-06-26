@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const HomeScreen = () => {
   return (
@@ -9,6 +9,15 @@ const HomeScreen = () => {
       </Text>
       <Text style={styles.subtitle}>It's more about calculator</Text>
       <Text style={styles.version}>Version 2.0</Text>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Start Calculating</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Explore Features</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -44,6 +53,21 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 20,
     textAlign: "center",
+  },
+  buttonContainer: {
+    marginTop: 30,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "80%",
+  },
+  button: {
+    backgroundColor: "#444",
+    padding: 15,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
   },
 });
 
