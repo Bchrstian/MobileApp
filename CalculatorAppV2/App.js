@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useContext } from "react";
+import { View, Text, StyleSheet, Image, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import {
   createDrawerNavigator,
@@ -7,33 +7,76 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/Ionicons";
+import Toast from "react-native-toast-message";
 
 import MyTabs from "./MyTabs";
 import SettingsScreen from "./SettingsScreen";
 import PrivacyScreen from "./PrivacyScreen";
+import NetworkStatus from "./NetworkStatus";
+import BatteryStatus from "./BatteryStatus";
+import { ThemeContext, ThemeProvider } from "./ThemeContext"; // Importing the ThemeContext and ThemeProvider
 
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props) {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   return (
-    <DrawerContentScrollView {...props}>
-      <View style={styles.profileContainer}>
+    <DrawerContentScrollView
+      {...props}
+      style={theme === "dark" ? styles.darkDrawer : styles.lightDrawer}
+    >
+      <View
+        style={[
+          styles.profileContainer,
+          theme === "dark" && styles.darkProfileContainer,
+        ]}
+      >
         <Image
           source={require("./assets/profile.jpg")}
           style={styles.profileImage}
         />
-        <Text style={styles.profileName}>BYIRINGIRO Christian</Text>
-        <Text style={styles.profileUsername}>@b_christian</Text>
+        <Text
+          style={[
+            styles.profileName,
+            theme === "dark" && styles.darkProfileName,
+          ]}
+        >
+          BYIRINGIRO Christian
+        </Text>
+        <Text
+          style={[
+            styles.profileUsername,
+            theme === "dark" && styles.darkProfileUsername,
+          ]}
+        >
+          @b_christian
+        </Text>
       </View>
       <DrawerItemList {...props} />
+      <Button
+        title={`Switch to ${theme === "dark" ? "Light" : "Dark"} Mode`}
+        onPress={toggleTheme}
+      />
     </DrawerContentScrollView>
   );
 }
 
 function PlaceholderScreen({ title }) {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <View style={styles.screenContainer}>
-      <Text style={styles.screenText}>{title}</Text>
+    <View
+      style={[
+        styles.screenContainer,
+        theme === "dark" && styles.darkScreenContainer,
+      ]}
+    >
+      <Text
+        style={[styles.screenText, theme === "dark" && styles.darkScreenText]}
+      >
+        {title}
+      </Text>
     </View>
   );
 }
@@ -47,90 +90,95 @@ const LogOutScreen = () => <PlaceholderScreen title="Log Out" />;
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        initialRouteName="Home"
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-        screenOptions={{
-          drawerStyle: { backgroundColor: "#222" },
-          headerStyle: { backgroundColor: "#222" },
-          headerTintColor: "#fff",
-          drawerActiveTintColor: "#fff",
-          drawerInactiveTintColor: "#888",
-        }}
-      >
-        <Drawer.Screen
-          name="Home"
-          component={MyTabs}
-          options={{
-            title: "Home",
-            drawerIcon: ({ color, size }) => (
-              <Icon name="home" size={size} color={color} />
-            ),
+    <ThemeProvider>
+      <NavigationContainer>
+        <NetworkStatus />
+        <BatteryStatus />
+        <Drawer.Navigator
+          initialRouteName="Home"
+          drawerContent={(props) => <CustomDrawerContent {...props} />}
+          screenOptions={{
+            drawerStyle: { backgroundColor: "transparent" }, // Drawer style is handled dynamically in CustomDrawerContent
+            headerStyle: { backgroundColor: "transparent" }, // Header style is handled dynamically in screenOptions
+            headerTintColor: "#000", // Default header tint color
+            drawerActiveTintColor: "#000", // Default drawer active tint color
+            drawerInactiveTintColor: "#888", // Default drawer inactive tint color
           }}
-        />
-        <Drawer.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{
-            title: "Settings",
-            drawerIcon: ({ color, size }) => (
-              <Icon name="settings" size={size} color={color} />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="Privacy"
-          component={PrivacyScreen}
-          options={{
-            title: "Privacy",
-            drawerIcon: ({ color, size }) => (
-              <Icon name="lock-closed" size={size} color={color} />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="ShareApp"
-          component={ShareAppScreen}
-          options={{
-            title: "Share App",
-            drawerIcon: ({ color, size }) => (
-              <Icon name="share-social" size={size} color={color} />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="AccountManagement"
-          component={AccountManagementScreen}
-          options={{
-            title: "Account Management",
-            drawerIcon: ({ color, size }) => (
-              <Icon name="person" size={size} color={color} />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="DeleteAccount"
-          component={DeleteAccountScreen}
-          options={{
-            title: "Delete Account",
-            drawerIcon: ({ color, size }) => (
-              <Icon name="trash" size={size} color={color} />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="LogOut"
-          component={LogOutScreen}
-          options={{
-            title: "Log Out",
-            drawerIcon: ({ color, size }) => (
-              <Icon name="log-out" size={size} color={color} />
-            ),
-          }}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
+        >
+          <Drawer.Screen
+            name="Home"
+            component={MyTabs}
+            options={{
+              title: "Home",
+              drawerIcon: ({ color, size }) => (
+                <Icon name="home" size={size} color={color} />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="Settings"
+            component={SettingsScreen}
+            options={{
+              title: "Settings",
+              drawerIcon: ({ color, size }) => (
+                <Icon name="settings" size={size} color={color} />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="Privacy"
+            component={PrivacyScreen}
+            options={{
+              title: "Privacy",
+              drawerIcon: ({ color, size }) => (
+                <Icon name="lock-closed" size={size} color={color} />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="ShareApp"
+            component={ShareAppScreen}
+            options={{
+              title: "Share App",
+              drawerIcon: ({ color, size }) => (
+                <Icon name="share-social" size={size} color={color} />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="AccountManagement"
+            component={AccountManagementScreen}
+            options={{
+              title: "Account Management",
+              drawerIcon: ({ color, size }) => (
+                <Icon name="person" size={size} color={color} />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="DeleteAccount"
+            component={DeleteAccountScreen}
+            options={{
+              title: "Delete Account",
+              drawerIcon: ({ color, size }) => (
+                <Icon name="trash" size={size} color={color} />
+              ),
+            }}
+          />
+          <Drawer.Screen
+            name="LogOut"
+            component={LogOutScreen}
+            options={{
+              title: "Log Out",
+              drawerIcon: ({ color, size }) => (
+                <Icon name="log-out" size={size} color={color} />
+              ),
+            }}
+          />
+        </Drawer.Navigator>
+        <Toast ref={(ref) => Toast.setRef(ref)} />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
 
@@ -140,6 +188,9 @@ const styles = StyleSheet.create({
     padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: "#555",
+  },
+  darkProfileContainer: {
+    borderBottomColor: "#ccc",
   },
   profileImage: {
     width: 80,
@@ -152,9 +203,15 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     color: "#fff",
   },
+  darkProfileName: {
+    color: "#000",
+  },
   profileUsername: {
     fontSize: 14,
     color: "#888",
+  },
+  darkProfileUsername: {
+    color: "#555",
   },
   screenContainer: {
     flex: 1,
@@ -162,8 +219,26 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#222",
   },
+  darkScreenContainer: {
+    backgroundColor: "#f5f5f5",
+  },
   screenText: {
     color: "#fff",
     fontSize: 20,
+  },
+  darkScreenText: {
+    color: "#000",
+  },
+  darkDrawer: {
+    backgroundColor: "#222",
+  },
+  lightDrawer: {
+    backgroundColor: "#fff",
+  },
+  darkHeader: {
+    backgroundColor: "#222",
+  },
+  lightHeader: {
+    backgroundColor: "#fff",
   },
 });

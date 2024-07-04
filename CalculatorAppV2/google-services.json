@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "56955554744",
+    "firebase_url": "https://mobileapp-d3206-default-rtdb.firebaseio.com",
+    "project_id": "mobileapp-d3206",
+    "storage_bucket": "mobileapp-d3206.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56955554744:android:d91e00478e4c12f12ddd4d",
+        "android_client_info": {
+          "package_name": "Christian.auca.rw"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX_rMDZkKpNtfafV-Sei02kzR2ij546-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

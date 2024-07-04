@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -6,10 +6,13 @@ import HomeScreen from "./HomeScreen";
 import RegisterScreen from "./RegisterScreen";
 import SignInScreen from "./SignInScreen";
 import CalculatorScreen from "./CalculatorScreen";
+import { ThemeContext } from "./ThemeContext"; // Adjust the path as needed
 
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -28,15 +31,15 @@ function MyTabs() {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: theme === "dark" ? "tomato" : "tomato",
+        tabBarInactiveTintColor: theme === "dark" ? "gray" : "gray",
         tabBarStyle: {
-          backgroundColor: "#1a1a1a", // Dark background for the tab bar
+          backgroundColor: theme === "dark" ? "#1a1a1a" : "#fff", // Dark or light background for the tab bar
         },
         headerStyle: {
-          backgroundColor: "#1a1a1a", // Dark background for the header
+          backgroundColor: theme === "dark" ? "#1a1a1a" : "#fff", // Dark or light background for the header
         },
-        headerTintColor: "#fff", // White color for the header text
+        headerTintColor: theme === "dark" ? "#fff" : "#000", // White or black color for the header text
       })}
     >
       <Tab.Screen

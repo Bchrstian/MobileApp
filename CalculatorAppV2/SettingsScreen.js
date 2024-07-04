@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -6,8 +6,14 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
+import { ThemeContext } from "./ThemeContext"; // Import the ThemeContext
 
 const SettingsScreen = () => {
+  const { theme } = useContext(ThemeContext); // Get the current theme
+
+  // Define styles conditionally based on the theme
+  const styles = getStyles(theme);
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.section}>
@@ -50,30 +56,32 @@ const SettingsScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000", // Black background
-  },
-  section: {
-    marginVertical: 20,
-    paddingHorizontal: 20,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 10,
-  },
-  option: {
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "#333",
-  },
-  optionText: {
-    color: "#1E90FF", // Blue text
-    fontSize: 16,
-  },
-});
+// Function to get styles based on the theme
+const getStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme === "dark" ? "#000" : "#fff", // Dark or light background
+    },
+    section: {
+      marginVertical: 20,
+      paddingHorizontal: 20,
+    },
+    sectionTitle: {
+      fontSize: 18,
+      fontWeight: "bold",
+      color: theme === "dark" ? "#fff" : "#000", // Dark or light text
+      marginBottom: 10,
+    },
+    option: {
+      paddingVertical: 15,
+      borderBottomWidth: 1,
+      borderBottomColor: theme === "dark" ? "#333" : "#ccc", // Dark or light border
+    },
+    optionText: {
+      color: theme === "dark" ? "#1E90FF" : "#007AFF", // Dark or light blue text
+      fontSize: 16,
+    },
+  });
 
 export default SettingsScreen;

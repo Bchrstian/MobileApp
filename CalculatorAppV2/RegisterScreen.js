@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -7,8 +7,10 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
+import { ThemeContext } from "./ThemeContext"; // Adjust the path as needed
 
 const RegisterScreen = ({ navigation }) => {
+  const { theme } = useContext(ThemeContext);
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
@@ -24,17 +26,19 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Register</Text>
+    <View style={[styles.container, theme === "dark" && styles.darkContainer]}>
+      <Text style={[styles.title, theme === "dark" && styles.darkTitle]}>
+        Register
+      </Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, theme === "dark" && styles.darkInput]}
         placeholder="Email"
         placeholderTextColor="#aaa"
         value={email}
         onChangeText={setEmail}
       />
       <TextInput
-        style={styles.input}
+        style={[styles.input, theme === "dark" && styles.darkInput]}
         placeholder="Phone Number"
         placeholderTextColor="#aaa"
         value={phoneNumber}
@@ -42,7 +46,7 @@ const RegisterScreen = ({ navigation }) => {
         keyboardType="phone-pad"
       />
       <TextInput
-        style={styles.input}
+        style={[styles.input, theme === "dark" && styles.darkInput]}
         placeholder="Password"
         placeholderTextColor="#aaa"
         value={password}
@@ -50,22 +54,55 @@ const RegisterScreen = ({ navigation }) => {
         secureTextEntry
       />
       <TextInput
-        style={styles.input}
+        style={[styles.input, theme === "dark" && styles.darkInput]}
         placeholder="Confirm Password"
         placeholderTextColor="#aaa"
         value={confirmPassword}
         onChangeText={setConfirmPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Register</Text>
+      <TouchableOpacity
+        style={[styles.button, theme === "dark" && styles.darkButton]}
+        onPress={handleRegister}
+      >
+        <Text
+          style={[styles.buttonText, theme === "dark" && styles.darkButtonText]}
+        >
+          Register
+        </Text>
       </TouchableOpacity>
-      <Text style={styles.orText}>or</Text>
-      <TouchableOpacity style={styles.socialButton}>
-        <Text style={styles.socialButtonText}>Register with LinkedIn</Text>
+      <Text style={[styles.orText, theme === "dark" && styles.darkOrText]}>
+        or
+      </Text>
+      <TouchableOpacity
+        style={[
+          styles.socialButton,
+          theme === "dark" && styles.darkSocialButton,
+        ]}
+      >
+        <Text
+          style={[
+            styles.socialButtonText,
+            theme === "dark" && styles.darkSocialButtonText,
+          ]}
+        >
+          Register with LinkedIn
+        </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.socialButton}>
-        <Text style={styles.socialButtonText}>Register with GitHub</Text>
+      <TouchableOpacity
+        style={[
+          styles.socialButton,
+          theme === "dark" && styles.darkSocialButton,
+        ]}
+      >
+        <Text
+          style={[
+            styles.socialButtonText,
+            theme === "dark" && styles.darkSocialButtonText,
+          ]}
+        >
+          Register with GitHub
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -76,23 +113,33 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#000", // Black background
+    backgroundColor: "#f5f5f5", // Light background
     padding: 20,
+  },
+  darkContainer: {
+    backgroundColor: "#000", // Dark background
   },
   title: {
     fontSize: 36,
     fontWeight: "bold",
-    color: "#fff", // White text color
+    color: "#000", // Light text color
     marginBottom: 20,
+  },
+  darkTitle: {
+    color: "#fff", // Dark text color
   },
   input: {
     width: "100%",
     height: 50,
-    backgroundColor: "#333",
+    backgroundColor: "#eee", // Light input background
     borderRadius: 10,
     paddingHorizontal: 15,
-    color: "#fff",
+    color: "#000", // Light text color
     marginBottom: 15,
+  },
+  darkInput: {
+    backgroundColor: "#333", // Dark input background
+    color: "#fff", // Dark text color
   },
   button: {
     width: "100%",
@@ -103,27 +150,42 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 15,
   },
+  darkButton: {
+    backgroundColor: "#1E90FF", // Keep the button color consistent
+  },
   buttonText: {
-    color: "#fff",
+    color: "#fff", // Light button text color
     fontSize: 18,
     fontWeight: "bold",
   },
+  darkButtonText: {
+    color: "#fff", // Keep the button text color consistent
+  },
   orText: {
-    color: "#fff",
+    color: "#000", // Light text color
     marginVertical: 10,
+  },
+  darkOrText: {
+    color: "#fff", // Dark text color
   },
   socialButton: {
     width: "100%",
     height: 50,
-    backgroundColor: "#555",
+    backgroundColor: "#ddd", // Light button background
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
     marginBottom: 10,
   },
+  darkSocialButton: {
+    backgroundColor: "#555", // Dark button background
+  },
   socialButtonText: {
-    color: "#fff",
+    color: "#000", // Light button text color
     fontSize: 18,
+  },
+  darkSocialButtonText: {
+    color: "#fff", // Dark button text color
   },
 });
 
